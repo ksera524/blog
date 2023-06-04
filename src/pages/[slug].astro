@@ -24,7 +24,7 @@ export interface Props {
 
 export async function getStaticPaths() {
   const blogs = await getAllBlogs();
-  return blogs.map((blog) => {
+  return blogs.reverse().map((blog) => {
     return {
       params: {
         slug: blog.slug,
