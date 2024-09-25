@@ -1,13 +1,16 @@
 baseURL = 'https://blog-ami.pages.dev/'
 languageCode = "ja"
-paginate = 10 # ページ当たりの投稿数
+
 title = 'タイトルはそのうち考える'
 theme = "mainroad"
 
-[Author]
-name = "ksera" # 作者名
-bio = "ksera's Japanese software engineer" # 作者の自己紹介
-avatar = "img/img.jpg" # 作者のアバター画像
+[pagination]
+pagerSize = 10 # ページ当たりの投稿数
+
+[taxonomies]
+  author = "authors" 
+  category = "categories"
+  tag = "tags"
 
 [Params]
 description = "ksera's Personal blog" # サイトの説明
@@ -45,3 +48,9 @@ tags_counter = false # タグウィジェットでカウンターを表示する
 [Params.widgets.social]
   cached = false # activate cache if true
   github = "ksera524"
+
+
+[Params.author]
+name = "ksera" # 作者名
+bio = "ksera's Japanese software engineer" # 作者の自己紹介
+avatar = "img/img.jpg" # 作者のアバター画像

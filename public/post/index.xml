@@ -6,14 +6,21 @@
     <description>Recent content in Posts on タイトルはそのうち考える</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 16 May 2024 18:05:47 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 25 Sep 2024 16:02:00 +0900</lastBuildDate>
     <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Planning</title>
+      <link>http://localhost:1313/post/k8s/planning/</link>
+      <pubDate>Wed, 25 Sep 2024 16:02:00 +0900</pubDate>
+      <guid>http://localhost:1313/post/k8s/planning/</guid>
+      <description>&lt;h1 id=&#34;おうちk8sの再作成ロードマップ&#34;&gt;おうちk8sの再作成ロードマップ&lt;/h1&gt;&#xA;&lt;p&gt;おうちk8sが死んでしまったので新しく作成するが、前回の失敗を踏まえて再作成する。&lt;/p&gt;&#xA;&lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;</description>
+    </item>
     <item>
       <title>ブログメモ</title>
       <link>http://localhost:1313/post/%E3%83%96%E3%83%AD%E3%82%B0%E3%83%A1%E3%83%A2/</link>
       <pubDate>Thu, 16 May 2024 18:05:47 +0900</pubDate>
       <guid>http://localhost:1313/post/%E3%83%96%E3%83%AD%E3%82%B0%E3%83%A1%E3%83%A2/</guid>
-      <description>新しく作成したBlogメモ Astro.jsを学ぶ気が失せたので体験よかったHugoで作り直した。&#xA;テーマ mainloadというテーマを利用することにした。リポジトリはここ。&#xA;コマンド 記事作成&#xA;hugo new content post/hello-world/index.md Local実行&#xA;hugo server -D 疑問 post以下に配置する必要がある？ 年月ごとのサイドバーは用意できるか </description>
+      <description>&lt;h1 id=&#34;新しく作成したblogメモ&#34;&gt;新しく作成したBlogメモ&lt;/h1&gt;&#xA;&lt;p&gt;Astro.jsを学ぶ気が失せたので体験よかったHugoで作り直した。&lt;/p&gt;&#xA;&lt;h3 id=&#34;テーマ&#34;&gt;テーマ&lt;/h3&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://themes.gohugo.io/themes/mainroad/&#34;&gt;mainload&lt;/a&gt;というテーマを利用することにした。リポジトリは&lt;a href=&#34;https://github.com/Vimux/Mainroad/tree/master&#34;&gt;ここ&lt;/a&gt;。&lt;/p&gt;&#xA;&lt;h3 id=&#34;コマンド&#34;&gt;コマンド&lt;/h3&gt;&#xA;&lt;p&gt;記事作成&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo new content post/hello-world/index.md&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Local実行&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo server -D&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;疑問&#34;&gt;疑問&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;post以下に配置する必要がある？&lt;/li&gt;&#xA;&lt;li&gt;年月ごとのサイドバーは用意できるか&lt;/li&gt;&#xA;&lt;li&gt;固定ページは用意できるのか&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>

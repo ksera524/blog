@@ -3,10 +3,8 @@
 title: '{{ replace .File.ContentBaseName "-" " " | title }}'
 date: {{ .Date }}
 description: "Example article description" #記事の説明
-categories: # カテゴリ
-  - "Category 1"
-tags:
-  - "Test"
+categories: ["Category 1"]
+tags: ["Test"]
 # menu: main  # オプション, メニューにページを追加: main, side, footer
 
 comments: false # 特定のページでDisqusコメントを有効化
