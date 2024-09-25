@@ -10,7 +10,7 @@
   <meta property="og:site_name" content="タイトルはそのうち考える">
   <meta property="og:title" content="K8s">
   <meta property="og:description" content="ksera&#39;s Personal blog">
-  <meta property="og:locale" content="ja">
+  <meta property="og:locale" content="ja_JP">
   <meta property="og:type" content="website">
 
 		
@@ -61,7 +61,7 @@
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/post/k8s/planning/" rel="bookmark">
-			Planning
+			おうちk8sの再作成ロードマップ
 			</a>
 		</h2>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
@@ -73,24 +73,15 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		<h1 id="おうちk8sの再作成ロードマップ">おうちk8sの再作成ロードマップ</h1>
-<p>おうちk8sが死んでしまったので新しく作成するが、前回の失敗を踏まえて再作成する。</p>
+		<p>おうちk8sが死んでしまったので新しく作成するが、前回の失敗を踏まえて再作成する。</p>
 <h2 id="反省点">反省点</h2>
 <h3 id="そもそも死んだ理由">そもそも死んだ理由</h3>
 <p>k8sが死んだのは単純にホストPCのストレージ容量不足だった。
 1台にコントロールプレーンとワーカーノードを詰め込んだが、CPUなどはまだまだ余裕があった。
 ストレージを圧迫した理由は下記。</p>
-<ol>
-<li>HarborのImageの容量</li>
-<li>PGOの容量</li>
-<li>CronJobの成功・失敗時の保持数を設定していなかった（全件保持していた）</li>
-</ol>
-<h3 id="手作業が多かった">手作業が多かった</h3>
-<p>試行錯誤を重ねていたので、どういう設定だったか覚えていない。
-HarborのTLS証明書周りなどは完全に忘れた。</p>
-<h2 id="再建計画">再建計画</h2>
-<h3 id="インフラ管理">インフラ管理</h3>
-<p>k8sクラスタ自体はTerraformで管理し、作成・破壊を簡単にできるようにしておく。</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/post/k8s/planning/">Read more…</a>
 	</div>
 </article>
 </main>
@@ -119,10 +110,8 @@ HarborのTLS証明書周りなどは完全に忘れた。</p>
 <div class="widget-taglist widget">
 	<h4 class="widget__title">Tags</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/ansible/" title="Ansible">Ansible</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="Hugo">Hugo</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/k8s/" title="K8s">K8s</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/terraform/" title="Terraform">Terraform</a>
 	</div>
 </div>
 <div class="widget-social widget">

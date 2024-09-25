@@ -1,6 +1,6 @@
 ---
 # Common-Defined params
-title: 'Planning'
+title: 'おうちk8sの再作成ロードマップ'
 date: 2024-09-25T16:02:00+09:00
 description: "おうちk8sの再建計画をまとめる" #記事の説明
 categories: ["おうちk8s"]
@@ -18,8 +18,6 @@ widgets:  # 特定のページでサイドバーウィジェットを有効化(�
   - "recent"
   - "taglist"
 ---
-
-# おうちk8sの再作成ロードマップ
 おうちk8sが死んでしまったので新しく作成するが、前回の失敗を踏まえて再作成する。
 
 ## 反省点
@@ -63,7 +61,7 @@ Ansibleでは主にk8sへのアプリケーションデプロイを担う。
 4. Github ActionsをSelf Hosted Runnerでk8s上に稼働させ、CI/CDも自己管理する（Cloudfrearの容量制限への対策でもある）
 5. PGOはいったんやめて、TiDB Serverlessの無料枠を利用する
 
-##　いつかやってみたいリスト
+## いつかやってみたいリスト
 1. OpenStackを使った仮想マシン上にk8sを展開する
 2. メインPC(win)の寿命(win11へのupdate不可)が2025年なので、2台目のサーバーとして使う。
 3. 構成図を書く
