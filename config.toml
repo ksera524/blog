@@ -50,7 +50,7 @@ tags_counter = false # タグウィジェットでカウンターを表示する
   github = "ksera524"
 
 
-[Params.author]
-name = "ksera" # 作者名
-bio = "ksera's Japanese software engineer" # 作者の自己紹介
-avatar = "img/img.jpg" # 作者のアバター画像
+[Author]
+  name = "ksera" # 作者名
+  bio = "ksera's Japanese software engineer" # 作者の自己紹介
+  avatar = "img/img.jpg" # 作者のアバター画像
