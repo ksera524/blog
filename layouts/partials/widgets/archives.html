@@ -1,9 +1,17 @@
 {{- $posts := where .Site.RegularPages "Type" "post" }}
-{{- $years := slice }}
+{{- $archiveData := slice }}
+
 {{- range $posts }}
   {{- $year := .Date.Format "2006" }}
-  {{- if not (in $years $year) }}
-    {{- $years = $years | append $year }}
+  {{- $month := .Date.Format "01" }}
+  {{- $yearMonth := .Date.Format "2006-01" }}
+  {{- $archiveData = $archiveData | append (dict "year" $year "month" $month "yearMonth" $yearMonth "post" .) }}
+{{- end }}
+
+{{- $years := slice }}
+{{- range $archiveData }}
+  {{- if not (in $years .year) }}
+    {{- $years = $years | append .year }}
   {{- end }}
 {{- end }}
 {{- $years = sort $years "value" "desc" }}
@@ -14,12 +22,16 @@
 	<div class="widget__content">
 		{{- range $years }}
 		{{- $year := . }}
-		{{- $yearPosts := where $posts ".Date.Format" "2006" $year }}
+		{{- $yearData := slice }}
+		{{- range $archiveData }}
+			{{- if eq .year $year }}
+				{{- $yearData = $yearData | append . }}
+			{{- end }}
+		{{- end }}
 		{{- $months := slice }}
-		{{- range $yearPosts }}
-			{{- $month := .Date.Format "01" }}
-			{{- if not (in $months $month) }}
-				{{- $months = $months | append $month }}
+		{{- range $yearData }}
+			{{- if not (in $months .month) }}
+				{{- $months = $months | append .month }}
 			{{- end }}
 		{{- end }}
 		{{- $months = sort $months "value" "desc" }}
@@ -28,7 +40,12 @@
 			<ul class="widget__list">
 			{{- range $months }}
 				{{- $month := . }}
-				{{- $monthPosts := where $yearPosts ".Date.Format" "01" $month }}
+				{{- $monthData := slice }}
+				{{- range $yearData }}
+					{{- if eq .month $month }}
+						{{- $monthData = $monthData | append . }}
+					{{- end }}
+				{{- end }}
 				{{- $monthName := "" }}
 				{{- if eq $month "01" }}{{ $monthName = "1月" }}
 				{{- else if eq $month "02" }}{{ $monthName = "2月" }}
@@ -45,7 +62,7 @@
 				{{- end }}
 				<li class="widget__item">
 					<a class="widget__link" href="/post/">{{ $monthName }}</a>
-					<span class="widget__counter">({{ len $monthPosts }})</span>
+					<span class="widget__counter">({{ len $monthData }})</span>
 				</li>
 			{{- end }}
 			</ul>
