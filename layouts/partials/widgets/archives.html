@@ -1,48 +1,51 @@
 {{- $posts := where .Site.RegularPages "Type" "post" }}
-{{- $grouped := dict }}
+{{- $years := slice }}
 {{- range $posts }}
-  {{- $yearMonth := .Date.Format "2006-01" }}
   {{- $year := .Date.Format "2006" }}
-  {{- $month := .Date.Format "01" }}
-  {{- if not (isset $grouped $year) }}
-    {{- $grouped = merge $grouped (dict $year (dict)) }}
+  {{- if not (in $years $year) }}
+    {{- $years = $years | append $year }}
   {{- end }}
-  {{- $yearGroup := index $grouped $year }}
-  {{- if isset $yearGroup $yearMonth }}
-    {{- $monthData := index $yearGroup $yearMonth }}
-    {{- $yearGroup = merge $yearGroup (dict $yearMonth (dict "count" (add $monthData.count 1) "month" $month)) }}
-  {{- else }}
-    {{- $yearGroup = merge $yearGroup (dict $yearMonth (dict "count" 1 "month" $month)) }}
-  {{- end }}
-  {{- $grouped = merge $grouped (dict $year $yearGroup) }}
 {{- end }}
+{{- $years = sort $years "value" "desc" }}
 
-{{- if gt (len $grouped) 0 }}
+{{- if gt (len $posts) 0 }}
 <div class="widget-archives widget">
 	<h4 class="widget__title">アーカイブ</h4>
 	<div class="widget__content">
-		{{- range $year, $months := $grouped }}
+		{{- range $years }}
+		{{- $year := . }}
+		{{- $yearPosts := where $posts ".Date.Format" "2006" $year }}
+		{{- $months := slice }}
+		{{- range $yearPosts }}
+			{{- $month := .Date.Format "01" }}
+			{{- if not (in $months $month) }}
+				{{- $months = $months | append $month }}
+			{{- end }}
+		{{- end }}
+		{{- $months = sort $months "value" "desc" }}
 		<details class="widget__archives-year" open>
 			<summary class="widget__archives-year-title">{{ $year }}年</summary>
 			<ul class="widget__list">
-			{{- range $yearMonth, $data := $months }}
+			{{- range $months }}
+				{{- $month := . }}
+				{{- $monthPosts := where $yearPosts ".Date.Format" "01" $month }}
 				{{- $monthName := "" }}
-				{{- if eq $data.month "01" }}{{ $monthName = "1月" }}
-				{{- else if eq $data.month "02" }}{{ $monthName = "2月" }}
-				{{- else if eq $data.month "03" }}{{ $monthName = "3月" }}
-				{{- else if eq $data.month "04" }}{{ $monthName = "4月" }}
-				{{- else if eq $data.month "05" }}{{ $monthName = "5月" }}
-				{{- else if eq $data.month "06" }}{{ $monthName = "6月" }}
-				{{- else if eq $data.month "07" }}{{ $monthName = "7月" }}
-				{{- else if eq $data.month "08" }}{{ $monthName = "8月" }}
-				{{- else if eq $data.month "09" }}{{ $monthName = "9月" }}
-				{{- else if eq $data.month "10" }}{{ $monthName = "10月" }}
-				{{- else if eq $data.month "11" }}{{ $monthName = "11月" }}
-				{{- else if eq $data.month "12" }}{{ $monthName = "12月" }}
+				{{- if eq $month "01" }}{{ $monthName = "1月" }}
+				{{- else if eq $month "02" }}{{ $monthName = "2月" }}
+				{{- else if eq $month "03" }}{{ $monthName = "3月" }}
+				{{- else if eq $month "04" }}{{ $monthName = "4月" }}
+				{{- else if eq $month "05" }}{{ $monthName = "5月" }}
+				{{- else if eq $month "06" }}{{ $monthName = "6月" }}
+				{{- else if eq $month "07" }}{{ $monthName = "7月" }}
+				{{- else if eq $month "08" }}{{ $monthName = "8月" }}
+				{{- else if eq $month "09" }}{{ $monthName = "9月" }}
+				{{- else if eq $month "10" }}{{ $monthName = "10月" }}
+				{{- else if eq $month "11" }}{{ $monthName = "11月" }}
+				{{- else if eq $month "12" }}{{ $monthName = "12月" }}
 				{{- end }}
 				<li class="widget__item">
 					<a class="widget__link" href="/post/">{{ $monthName }}</a>
-					<span class="widget__counter">({{ $data.count }})</span>
+					<span class="widget__counter">({{ len $monthPosts }})</span>
 				</li>
 			{{- end }}
 			</ul>
