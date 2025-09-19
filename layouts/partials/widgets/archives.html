@@ -1,0 +1,75 @@
+{{- $posts := where .Site.RegularPages "Type" "post" }}
+{{- $grouped := dict }}
+{{- range $posts }}
+  {{- $yearMonth := .Date.Format "2006-01" }}
+  {{- $year := .Date.Format "2006" }}
+  {{- $month := .Date.Format "01" }}
+  {{- if not (isset $grouped $year) }}
+    {{- $grouped = merge $grouped (dict $year (dict)) }}
+  {{- end }}
+  {{- $yearGroup := index $grouped $year }}
+  {{- if isset $yearGroup $yearMonth }}
+    {{- $monthData := index $yearGroup $yearMonth }}
+    {{- $yearGroup = merge $yearGroup (dict $yearMonth (dict "count" (add $monthData.count 1) "month" $month)) }}
+  {{- else }}
+    {{- $yearGroup = merge $yearGroup (dict $yearMonth (dict "count" 1 "month" $month)) }}
+  {{- end }}
+  {{- $grouped = merge $grouped (dict $year $yearGroup) }}
+{{- end }}
+
+{{- if gt (len $grouped) 0 }}
+<div class="widget-archives widget">
+	<h4 class="widget__title">アーカイブ</h4>
+	<div class="widget__content">
+		{{- range $year, $months := $grouped }}
+		<details class="widget__archives-year" open>
+			<summary class="widget__archives-year-title">{{ $year }}年</summary>
+			<ul class="widget__list">
+			{{- range $yearMonth, $data := $months }}
+				{{- $monthName := "" }}
+				{{- if eq $data.month "01" }}{{ $monthName = "1月" }}
+				{{- else if eq $data.month "02" }}{{ $monthName = "2月" }}
+				{{- else if eq $data.month "03" }}{{ $monthName = "3月" }}
+				{{- else if eq $data.month "04" }}{{ $monthName = "4月" }}
+				{{- else if eq $data.month "05" }}{{ $monthName = "5月" }}
+				{{- else if eq $data.month "06" }}{{ $monthName = "6月" }}
+				{{- else if eq $data.month "07" }}{{ $monthName = "7月" }}
+				{{- else if eq $data.month "08" }}{{ $monthName = "8月" }}
+				{{- else if eq $data.month "09" }}{{ $monthName = "9月" }}
+				{{- else if eq $data.month "10" }}{{ $monthName = "10月" }}
+				{{- else if eq $data.month "11" }}{{ $monthName = "11月" }}
+				{{- else if eq $data.month "12" }}{{ $monthName = "12月" }}
+				{{- end }}
+				<li class="widget__item">
+					<a class="widget__link" href="/post/">{{ $monthName }}</a>
+					<span class="widget__counter">({{ $data.count }})</span>
+				</li>
+			{{- end }}
+			</ul>
+		</details>
+		{{- end }}
+	</div>
+</div>
+
+<style>
+.widget__archives-year {
+	margin-bottom: 0.5em;
+}
+.widget__archives-year-title {
+	cursor: pointer;
+	font-weight: bold;
+	padding: 0.25em 0;
+}
+.widget__archives-year-title:hover {
+	color: #e22d30;
+}
+.widget__archives-year .widget__list {
+	margin-left: 1em;
+	margin-top: 0.5em;
+}
+.widget__counter {
+	color: #999;
+	font-size: 0.9em;
+}
+</style>
+{{- end }}
