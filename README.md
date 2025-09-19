@@ -1,55 +1,147 @@
-# Astro Starter Kit: Basics
+# ksera's Blog
 
-```
-npm create astro@latest -- --template basics
-```
+Hugoベースの個人ブログです。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 必要なツール
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- [mise](https://mise.jdx.dev/) - バージョン管理ツール
+- Hugo (miseでインストール済み)
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+## セットアップ
 
+```bash
+# リポジトリをクローン
+git clone <repository-url>
+cd blog
 
-## 🚀 Project Structure
+# サブモジュール（テーマ）を初期化
+git submodule update --init --recursive
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+# miseでHugoを有効化
+mise use hugo
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 基本的な使い方
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### 開発サーバーの起動
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+# miseを有効化してHugoサーバーを起動
+eval "$(mise activate bash)" && hugo server -D
+```
 
-## 🧞 Commands
+サーバーは http://localhost:1313/ で起動します。
 
-All commands are run from the root of the project, from a terminal:
+### 新しい記事の作成
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+# 新しいブログ記事を作成
+hugo new post/記事タイトル.md
+```
 
-## 👀 Want to learn more?
+作成されたMarkdownファイルは `content/post/` ディレクトリに配置されます。
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### ビルド
+
+```bash
+# 本番用ビルド（publicディレクトリに生成）
+hugo
+
+# ドラフトも含めてビルド
+hugo -D
+```
+
+## ディレクトリ構成
+
+```
+blog/
+├── archetypes/     # 記事テンプレート
+├── config.toml     # サイト設定ファイル
+├── content/        # コンテンツ（記事）
+│   └── post/      # ブログ記事
+├── public/         # ビルド出力先
+├── static/         # 静的ファイル（画像など）
+└── themes/         # Hugoテーマ
+    └── mainroad/   # Mainroadテーマ
+```
+
+## 設定ファイル
+
+### config.toml
+
+主要な設定項目：
+
+- `baseURL` - サイトのベースURL
+- `title` - サイトタイトル
+- `theme` - 使用テーマ（mainroad）
+- `[Params.sidebar]` - サイドバー設定
+  - `widgets` - 表示するウィジェット（検索、アーカイブ、カテゴリなど）
+
+## 機能
+
+### サイドバーウィジェット
+
+- **検索機能** - 記事を検索
+- **年月アーカイブ** - 年月ごとの投稿数を表示
+- **カテゴリ** - カテゴリ一覧
+- **タグリスト** - タグ一覧
+- **ソーシャルリンク** - GitHubリンク
+
+### 記事のフロントマター
+
+```yaml
+---
+title: "記事タイトル"
+date: 2025-09-20T15:00:00+09:00
+draft: false
+categories: ["カテゴリ名"]
+tags: ["タグ1", "タグ2"]
+---
+```
+
+## よく使うコマンド
+
+```bash
+# 記事一覧を確認
+hugo list all
+
+# 下書き記事も含めて確認
+hugo list drafts
+
+# サイトの統計情報
+hugo env
+
+# キャッシュクリア
+hugo --gc
+```
+
+## デプロイ
+
+Cloudflare Pagesにデプロイされています。
+URL: https://blog-ami.pages.dev/
+
+mainブランチにプッシュすると自動的にデプロイされます。
+
+## トラブルシューティング
+
+### Hugoコマンドが見つからない場合
+
+```bash
+# miseを再度有効化
+eval "$(mise activate bash)"
+
+# または
+mise use hugo
+```
+
+### テーマが表示されない場合
+
+```bash
+# サブモジュールを更新
+git submodule update --init --recursive
+```
+
+## ライセンス
+
+このブログのコンテンツは著作者（ksera）に帰属します。
+Mainroadテーマは[MITライセンス](https://github.com/vimux/mainroad/blob/master/LICENSE.md)で提供されています。
