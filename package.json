@@ -6,12 +6,14 @@
     "dev": "ELEVENTY_ENV=development eleventy --serve",
     "debug": "eleventy --dryrun",
     "draft": "node scripts/new-draft.js",
-    "draft:cook": "node scripts/new-draft.js --section=cook"
+    "draft:cook": "node scripts/new-draft.js --section=cook",
+    "cook:import": "node scripts/cook-import.js"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.1"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "minisearch": "^7.1.1"
   }
 }
