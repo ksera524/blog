@@ -126,25 +126,11 @@ module.exports = function (eleventyConfig) {
       .sort((a, b) => b.date - a.date)
   );
 
-  eleventyConfig.addCollection("cook", (collectionApi) =>
-    collectionApi
-      .getFilteredByGlob("./content/cook/**/*.md")
-      .filter((item) => !item.data.draft || !isProd)
-      .sort((a, b) => b.date - a.date)
-  );
-
   eleventyConfig.addCollection("techArchives", (collectionApi) => {
     const items = collectionApi
       .getFilteredByGlob("./content/tech/**/*.md")
       .filter((item) => !item.data.draft || !isProd);
     return buildArchives(items, "tech").entries;
-  });
-
-  eleventyConfig.addCollection("cookArchives", (collectionApi) => {
-    const items = collectionApi
-      .getFilteredByGlob("./content/cook/**/*.md")
-      .filter((item) => !item.data.draft || !isProd);
-    return buildArchives(items, "cook").entries;
   });
 
   return {

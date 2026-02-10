@@ -14,9 +14,7 @@ module.exports = class {
   }
 
   render(data) {
-    const items = []
-      .concat(data.collections?.tech || [])
-      .concat(data.collections?.cook || []);
+    const items = data.collections?.tech || [];
 
     const payload = items.map((post) => ({
       id: post.url,

@@ -1,14 +1,12 @@
 {% extends "base.njk" %}
 
 {% block content %}
-  {% set combinedPosts = collections.tech or [] %}
-  {% set combinedPosts = combinedPosts.concat(collections.cook or []) %}
-  {% set combinedPosts = combinedPosts | sortByDateDesc %}
-  {% if combinedPosts and (combinedPosts | length) %}
+  {% set techPosts = collections.tech or [] %}
+  {% if techPosts and (techPosts | length) %}
     <div class="post-list">
-      {% for post in combinedPosts %}
+      {% for post in techPosts %}
         <article class="post-card">
-          <p class="post-card__meta">{{ post.date | readableDate }} · {{ post.data.section | upper }}</p>
+          <p class="post-card__meta">{{ post.date | readableDate }}</p>
           <h2 class="post-card__title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
           {% if post.data.description %}
             <p class="post-card__summary">{{ post.data.description }}</p>

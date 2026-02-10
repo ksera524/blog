@@ -87,10 +87,10 @@ a:hover {
 .site-header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-start;
+  gap: 12px;
   align-items: center;
-  padding: 20px 24px;
+  padding: 18px 22px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);

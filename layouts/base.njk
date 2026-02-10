@@ -18,11 +18,6 @@
           <a href="/" class="brand__title">{{ site.title }}</a>
           <span class="brand__tagline">{{ site.description }}</span>
         </div>
-        <nav class="site-nav">
-          <a href="/tech/" class="site-nav__link">Tech</a>
-          <a href="/cook/" class="site-nav__link">Cook</a>
-          <a href="/search/" class="site-nav__link">Search</a>
-        </nav>
       </header>
 
       <div class="site-body">
@@ -39,10 +34,7 @@
             </form>
           </section>
 
-          {% set archiveSections = ["tech", "cook"] %}
-          {% if currentSection %}
-            {% set archiveSections = [currentSection] %}
-          {% endif %}
+          {% set archiveSections = ["tech"] %}
           {% for archiveSection in archiveSections %}
             {% set archiveData = (collections[archiveSection] | buildArchives(archiveSection)) %}
             {% if archiveData and (archiveData.tree | length) %}

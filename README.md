@@ -16,22 +16,13 @@ npm run dev
 ```bash
 # Tech記事
 content/tech/記事タイトル.md
-
-# Cook記事
-content/cook/記事タイトル.md
 ```
 
 下書きを作る場合はコマンドでも生成できます。
 
 ```bash
-# Techの下書き
+# 下書き
 npm run draft -- "記事タイトル"
-
-# Cookの下書き
-npm run draft:cook -- "記事タイトル"
-
-# レシピURLからCook記事を生成
-npm run cook:import -- "https://www.kurashiru.com/recipes/a6a3ef63-1da6-44c5-ba61-c79b0de066bd"
 ```
 
 下書きにする場合は、フロントマターに `draft: true` を追加します。
@@ -52,7 +43,6 @@ npm run build
 blog/
 ├── content/        # コンテンツ（記事）
 │   ├── tech/      # Eleventy Tech記事
-│   └── cook/      # Eleventy Cook記事
 ├── layouts/       # Eleventyレイアウト
 ├── .eleventy.js   # Eleventy設定
 ├── package.json   # Eleventy依存関係
