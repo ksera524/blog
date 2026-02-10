@@ -1,0 +1,29 @@
+{% extends "base.njk" %}
+
+{% set postItems = collections[collection] or [] %}
+
+{% block content %}
+  <header class="page-header">
+    <h1>{{ title }}</h1>
+    {% if description %}<p class="lead">{{ description }}</p>{% endif %}
+  </header>
+
+  <div class="post-list">
+    {% for post in postItems %}
+      <article class="post-card">
+        <p class="post-card__meta">{{ post.date | readableDate }}</p>
+        <h2 class="post-card__title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+        {% if post.data.description %}
+          <p class="post-card__summary">{{ post.data.description }}</p>
+        {% endif %}
+        {% if post.data.categories and post.data.categories.length %}
+          <p class="post-card__categories">
+            {% for category in post.data.categories %}
+              <span class="pill">{{ category }}</span>
+            {% endfor %}
+          </p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% endblock %}

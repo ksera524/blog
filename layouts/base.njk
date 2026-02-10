@@ -1,0 +1,84 @@
+{% set currentSection = section or "tech" %}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ description or site.description }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Work+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+  </head>
+  <body class="section-{{ currentSection }}">
+    <div class="site">
+      <header class="site-header">
+        <div class="brand">
+          <a href="/" class="brand__title">{{ site.title }}</a>
+          <span class="brand__tagline">{{ site.description }}</span>
+        </div>
+        <nav class="site-nav">
+          <a href="/tech/" class="site-nav__link">Tech</a>
+          <a href="/cook/" class="site-nav__link">Cook</a>
+          <a href="/search/" class="site-nav__link">Search</a>
+        </nav>
+      </header>
+
+      <div class="site-body">
+        <main class="content">
+          {% block content %}{% endblock %}
+        </main>
+        <aside class="sidebar">
+          <section class="widget widget-search">
+            <h2 class="widget__title">Search</h2>
+            <p class="widget__text">詳細検索は検索ページで。</p>
+            <form class="search-form" action="/search/" method="get">
+              <input type="search" name="q" placeholder="検索ワード" aria-label="検索ワード">
+              <button class="button" type="submit">検索</button>
+            </form>
+          </section>
+
+          {% set archiveSections = ["tech", "cook"] %}
+          {% if currentSection %}
+            {% set archiveSections = [currentSection] %}
+          {% endif %}
+          {% for archiveSection in archiveSections %}
+            {% set archiveData = (collections[archiveSection] | buildArchives(archiveSection)) %}
+            {% if archiveData and (archiveData.tree | length) %}
+            <section class="widget widget-archives">
+              <h2 class="widget__title">アーカイブ{% if not currentSection %} ({{ archiveSection | capitalize }}){% endif %}</h2>
+              <div class="widget__content">
+                {% for yearEntry in archiveData.tree | dictsort | reverse %}
+                  {% set year = yearEntry[0] %}
+                  {% set months = yearEntry[1] %}
+                  <details class="archive-year" open>
+                    <summary class="archive-year__title">{{ year }}</summary>
+                    <ul class="archive-months">
+                      {% for monthEntry in months | dictsort | reverse %}
+                        {% set month = monthEntry[0] %}
+                        {% set meta = monthEntry[1] %}
+                        <li>
+                          <a href="{{ meta.url }}">{{ year }}/{{ month | pad2 }}</a>
+                          <span class="count">({{ meta.count }})</span>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </details>
+                {% endfor %}
+              </div>
+            </section>
+            {% endif %}
+          {% endfor %}
+
+        </aside>
+      </div>
+
+      <footer class="site-footer">
+        <p>© {{ site.author }} / {{ site.title }}</p>
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/minisearch@7.1.1/dist/umd/index.min.js" defer></script>
+    <script src="/js/search.js" defer></script>
+  </body>
+</html>

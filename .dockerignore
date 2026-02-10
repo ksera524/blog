@@ -1,0 +1,15 @@
+node_modules
+public
+.git
+.gitmodules
+.hugo_build.lock
+themes
+resources
+dist
+build
+logs
+*.log
+*.tmp
+*.swp
+*.swo
+.DS_Store

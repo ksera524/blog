@@ -1,0 +1,22 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <article class="post">
+    <header class="post-header">
+      <p class="post-meta">{{ date | readableDate }}</p>
+      <h1>{{ title }}</h1>
+      {% if description %}<p class="lead">{{ description }}</p>{% endif %}
+      {% if categories and categories.length %}
+        <div class="post-categories">
+          {% for category in categories %}
+            <span class="pill">{{ category }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="post-body">
+      {{ content | safe }}
+    </div>
+  </article>
+{% endblock %}

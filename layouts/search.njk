@@ -1,0 +1,35 @@
+{% extends "base.njk" %}
+
+{% block content %}
+  <header class="page-header">
+    <h1>{{ title }}</h1>
+    <p class="lead">カテゴリAND + キーワード検索</p>
+  </header>
+
+  <section class="search" data-search-root data-search-section="{{ section }}">
+    <div class="search__controls">
+      <label class="search__field">
+        <span>キーワード</span>
+        <input type="search" name="q" placeholder="検索ワードを入力" autocomplete="off" data-search-input>
+      </label>
+
+      <div class="search__sections" data-search-sections>
+        <p class="search__label">セクション</p>
+        <div class="search__chips" data-search-section-options></div>
+      </div>
+
+      <div class="search__categories">
+        <p class="search__label">カテゴリ（複数選択AND）</p>
+        <div class="search__chips" data-search-category-options></div>
+      </div>
+
+      <div class="search__tags">
+        <p class="search__label">タグ（カテゴリ内でAND）</p>
+        <div class="search__chips" data-search-tag-options></div>
+      </div>
+    </div>
+
+    <div class="search__summary" data-search-summary>検索結果: 0件</div>
+    <div class="search__results" data-search-results></div>
+  </section>
+{% endblock %}

@@ -21,6 +21,49 @@ git submodule update --init --recursive
 mise use hugo
 ```
 
+## Eleventy (並行運用)
+
+Hugoは残したままEleventyのビルドを追加しています。
+
+### 開発サーバーの起動
+
+```bash
+npm install
+npm run dev
+```
+
+サーバーは http://localhost:8080/ で起動します。
+
+### 記事の作成
+
+```bash
+# Tech記事
+content/tech/記事タイトル.md
+
+# Cook記事
+content/cook/記事タイトル.md
+```
+
+下書きを作る場合はコマンドでも生成できます。
+
+```bash
+# Techの下書き
+npm run draft -- "記事タイトル"
+
+# Cookの下書き
+npm run draft:cook -- "記事タイトル"
+```
+
+下書きにする場合は、フロントマターに `draft: true` を追加します。
+
+### ビルド
+
+```bash
+npm run build
+```
+
+`npm run dev` では下書きも表示されます。
+
 ## 基本的な使い方
 
 ### 開発サーバーの起動
@@ -58,7 +101,12 @@ blog/
 ├── archetypes/     # 記事テンプレート
 ├── config.toml     # サイト設定ファイル
 ├── content/        # コンテンツ（記事）
-│   └── post/      # ブログ記事
+│   ├── post/      # Hugo記事
+│   ├── tech/      # Eleventy Tech記事
+│   └── cook/      # Eleventy Cook記事
+├── layouts/       # Eleventyレイアウト
+├── .eleventy.js   # Eleventy設定
+├── package.json   # Eleventy依存関係
 ├── public/         # ビルド出力先
 ├── static/         # 静的ファイル（画像など）
 └── themes/         # Hugoテーマ
@@ -115,12 +163,9 @@ hugo env
 hugo --gc
 ```
 
-## デプロイ
+## CI
 
-Cloudflare Pagesにデプロイされています。
-URL: https://blog-ami.pages.dev/
-
-mainブランチにプッシュすると自動的にデプロイされます。
+GitHub Actionsでビルドチェックを実行します。
 
 ## トラブルシューティング
 

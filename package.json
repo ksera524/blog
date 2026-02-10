@@ -1,0 +1,17 @@
+{
+  "name": "ksera-blog",
+  "private": true,
+  "scripts": {
+    "build": "ELEVENTY_ENV=production eleventy",
+    "dev": "ELEVENTY_ENV=development eleventy --serve",
+    "debug": "eleventy --dryrun",
+    "draft": "node scripts/new-draft.js",
+    "draft:cook": "node scripts/new-draft.js --section=cook"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {
+    "minisearch": "^7.1.1"
+  }
+}
