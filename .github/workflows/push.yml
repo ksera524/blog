@@ -28,31 +28,7 @@ jobs:
         # 最新のタグを取得（存在しない場合は0.0.0から開始）
         LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
         echo "Latest tag: $LATEST_TAG"
-        
-        # v prefix を削除
-        LATEST_VERSION=${LATEST_TAG#v}
-        
-        # バージョンを分解
-        IFS='.' read -r MAJOR MINOR PATCH <<< "$LATEST_VERSION"
-        
-        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-          # PR時はビルドのみ、pushしない
-          VERSION="pr-${{ github.event.pull_request.number }}-$(git rev-parse --short HEAD)"
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "should_push=false" >> $GITHUB_OUTPUT
-          echo "should_tag=false" >> $GITHUB_OUTPUT
-          echo "🔍 PR Build: $VERSION (build only, no push)"
-        else
-          # main/masterへのpush時は自動的にパッチバージョンをインクリメント
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          
-          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-          echo "should_push=true" >> $GITHUB_OUTPUT
-          echo "should_tag=true" >> $GITHUB_OUTPUT
-          echo "📦 New Version: $NEW_VERSION (auto-incremented from $LATEST_VERSION)"
-        fi
-      
+              
     - name: Setup kubectl and Harbor credentials
       run: |
         echo "=== Setup kubectl and Harbor credentials ==="
@@ -97,7 +73,7 @@ jobs:
         HARBOR_PASSWORD=$(cat /tmp/harbor_password)
         HARBOR_URL="harbor.internal.qroksera.com"
         HARBOR_PROJECT=$(cat /tmp/harbor_project)
-        VERSION="${{ steps.version.outputs.version }}"
+        VERSION="latest"
         SHOULD_PUSH="${{ steps.version.outputs.should_push }}"
 
         # 内部CAを信頼ストアに追加
