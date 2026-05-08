@@ -1,7 +1,6 @@
 # ksera's Blog
 
 Eleventyベースの個人ブログです。
-
 ### 開発サーバーの起動
 
 ```bash
