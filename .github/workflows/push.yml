@@ -48,7 +48,7 @@ jobs:
   push-image:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs: build-image
-    runs-on: blog-runners
+    runs-on: harbor-publish-runners
     concurrency:
       group: harbor-publish-${{ github.repository }}-blog
       cancel-in-progress: false
